@@ -18,23 +18,24 @@ See [Proper Python](https://blog.summittdweller.com/posts/2022/09/proper-python/
 ### Quick Start
 
 ```bash
-╭─mcfatem@MAC02FK0XXQ05Q ~/GitHub/hugo-front-matter-tools ‹main› 
+╭─mcfatem@MAC02FK0XXQ05Q ~/GitHub/network-file-finder ‹main› 
 ╰─$ git pull
 Already up to date.
-╭─mcfatem@MAC02FK0XXQ05Q ~/GitHub/hugo-front-matter-tools ‹main› 
+╭─mcfatem@MAC02FK0XXQ05Q ~/GitHub/network-file-finder ‹main› 
 ╰─$ python3 -m venv .venv
-╭─mcfatem@MAC02FK0XXQ05Q ~/GitHub/hugo-front-matter-tools ‹main●› 
+╭─mcfatem@MAC02FK0XXQ05Q ~/GitHub/network-file-finder ‹main●› 
 ╰─$ source .venv/bin/activate
-(.venv) ╭─mcfatem@MAC02FK0XXQ05Q ~/GitHub/hugo-front-matter-tools ‹main●› 
+(.venv) ╭─mcfatem@MAC02FK0XXQ05Q ~/GitHub/network-file-finder ‹main●› 
 ╰─$ pip3 install -r python-requirements.txt
 ```
 
 Then...  
 
+```bash
+(.venv) ╭─mcfatem@MAC02FK0XXQ05Q ~/GitHub/network-file-finder ‹main●›
+╰─$ python3 network-file-finder.py -w https://docs.google.com/spreadsheets/d/1WetMvgQhwbqVrYLxg-vSHFNqEPCtPdl97g-OaIoghdw/edit\#gid\=492926725 -t /Volumes/DGIngest/Reunion >> output.txt
 ```
-(.venv) ╭─mcfatem@MAC02FK0XXQ05Q ~/GitHub/hugo-front-matter-tools ‹main●›
-╰─$ python3 rootstalk-front-matter-to-google-sheet.py
-```
+
 ---
 
 ## Use
