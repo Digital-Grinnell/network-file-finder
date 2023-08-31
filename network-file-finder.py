@@ -7,6 +7,8 @@ import getopt
 import re
 import gspread as gs
 import glob
+import csv
+import os.path
 
 # import os
 # import pathlib
@@ -40,11 +42,12 @@ if __name__ == '__main__':
   print('Argument List:', str(sys.argv[1:]), "\n")
 
   args = sys.argv[1:]
+  show = False
 
   try:
-    opts, args = getopt.getopt(args, 'hw:t:', ["help", "worksheet=", "tree-path="])
+    opts, args = getopt.getopt(args, 'hsw:t:', ["help", "worksheet=", "tree-path="])
   except getopt.GetoptError:
-    print("python3 network-file-finder.py --help --worksheet <worksheet URL> --tree-path <network tree path>\n")
+    print("python3 network-file-finder.py --help --worksheet <worksheet URL> --tree-path <network tree path> --show-matches\n")
     sys.exit(2)
 
   for opt, arg in opts:
@@ -55,6 +58,8 @@ if __name__ == '__main__':
       sheet = arg
     elif opt in ("-t", "--tree-path"):
       path = arg
+    elif opt in ("-s", "--show-matches"):
+      show = True
     else:
       assert False, "Unhandled option"
 
@@ -73,22 +78,39 @@ if __name__ == '__main__':
   worksheets = sh.worksheets()
   worksheet = [w for w in sh.worksheets() if w.id == gid]
 
+  # If -show-matches is true, open a .csv file to receive the matching filenames
+  if show:
+    csvfile = open('match-list.csv', 'w', newline='')
+    listwriter = csv.writer(csvfile, quoting=csv.QUOTE_MINIMAL)
+
   # Grab all filenames from column 'A' and begin glob loop
+  counter = 0
   filenames = worksheet[0].col_values(1)  
   for x in range(len(filenames)):
+    counter += 1
     pattern = path + "/**/" + filenames[x]
-    print("Finding a filename match for '{}'...".format(pattern))
+    print("\n{}. Finding a filename match for '{}'...".format(counter, pattern))
     found = glob.glob(pattern, recursive=True)
     if found:
+      print("  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
       print("  Found! List of matching files: '{}'".format(found))
+      if show:
+        line = "Found exact match for: {}".format(found[0])
+        listwriter.writerow([line])
     else:
       fuzzy = make_fuzzy_filename(pattern)
       print("  NONE FOUND! Starting 'fuzzy' search for: '{}'...".format(fuzzy) )
       found = glob.glob(fuzzy, recursive=True)
       if found:
         print("  Found! List of 'fuzzy' matching files: '{}'".format(found))
+        if show:
+          basename = os.path.basename(found[0])
+          listwriter.writerow([basename])
       else:
-        print("  ****************************************************************************************** \n    NOPE, could not even find a FUZZY match! \n" )
+        print("  ****************************************************************************************** \n    NOPE, could not even find a FUZZY match!" )
+        if show:
+          listwriter.writerow(["NO match found!"])
+
 
 
 
