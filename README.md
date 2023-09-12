@@ -1,6 +1,6 @@
 # Network File Finder
 
-A Python script desinged to recursively "find" a list of files in network storage.  The list of files will be a range of cells from the first column of a specified Google Sheet.  If an exact match can't be found, a "fuzzy" search is initiated to look for any matching filenames, but with a wildcard in place of the original extension.  The effect can be seen in the sample output from a "fuzzy" result shown below.  
+A Python script desinged to recursively "find" a list of files in network storage.  The list of files will be a range of cells from the specified column of a specified Google Sheet.  If an exact match can't be found, a "fuzzy" search is initiated to look for any matching filenames, but with a wildcard in place of the original extension.  The effect can be seen in the sample output from a "fuzzy" result shown below.  
 
 ```
 Finding a filename match for '/Volumes/DGIngest/Reunion/**/grinnell-26849.jpg'...
@@ -46,7 +46,15 @@ Runing `python3 network-file-finder.py --help` in the project directory generate
 python3 network-file-finder.py --help --worksheet <worksheet URL> --tree-path <network tree path>
 ```
 
-Note: Do NOT add a slash to the end of the `--tree-path`.  
+Note: Do NOT add a slash to the end of the `--tree-path`!
+
+### -s or --show-matches 
+
+Specifying this optional argument sets `show = True` causing the script to open/create a `match-list.csv` output file which will include a shorthand summary of each filename match outcome. 
+
+### -c or --column
+
+Specifying this optional argument sets `column` equal to the specified value causing the script to read target filenames from the corresponding column of the Google Sheet.  `column` defaults to `G` (typically the `OBJ` column) if not specifed.  If specified, `-c` or `--column` must be a single uppercase letter A through Z.  
 
 ## Complete Sample
 

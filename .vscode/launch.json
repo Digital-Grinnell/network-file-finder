@@ -12,7 +12,7 @@
       "program": "${file}",
       "console": "integratedTerminal",
       "justMyCode": true,
-      "args": ["-w", "https://docs.google.com/spreadsheets/d/1bBpO7waBhKwiUAnqYEb4ko1yC2uhbfKgbNBVLbnE61c/edit#gid=2032306483", "-t", "/Volumes/DGIngest/Reunion-Photos", "-s"]
+      "args": ["-w", "https://docs.google.com/spreadsheets/d/1hngZ7KOuuD3Ahxptr0jd0Yfv67BmCmqOToQ11SXPWck/edit#gid=554996606", "-t", "/Volumes/HADC_Repository", "-s", "-c", "B"]
     }
   ]
 }

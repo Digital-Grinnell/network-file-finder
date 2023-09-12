@@ -45,17 +45,25 @@ if __name__ == '__main__':
   show = False
 
   try:
-    opts, args = getopt.getopt(args, 'hsw:t:', ["help", "worksheet=", "tree-path="])
+    opts, args = getopt.getopt(args, 'shw:c:t:', ["help", "worksheet=", "column=", "tree-path="])
   except getopt.GetoptError:
-    print("python3 network-file-finder.py --help --worksheet <worksheet URL> --tree-path <network tree path> --show-matches\n")
+    print("python3 network-file-finder.py --help --worksheet <worksheet URL> --column <worksheet filename column> --tree-path <network tree path> --show-matches\n")
     sys.exit(2)
+
+  # default column for filenames is 'G' = 7 
+  column = 7
 
   for opt, arg in opts:
     if opt in ("-h", "--help"):
-      print("python3 network-file-finder.py --help --worksheet <worksheet URL> --tree-path <network tree path>\n")
+      print("python3 network-file-finder.py --help --worksheet <worksheet URL> --column <filename column> --tree-path <network tree path> --show-matches\n")
       sys.exit( )
     elif opt in ("-w", "--worksheet"):
       sheet = arg
+    elif opt in ("-c", "--column"):
+      if arg.isalpha() and arg.isupper():
+        column = str(ord(arg)-64)
+      else:
+        assert False, "Unhandled option: Column must be a single uppercase character from A through Z."
     elif opt in ("-t", "--tree-path"):
       path = arg
     elif opt in ("-s", "--show-matches"):
@@ -83,9 +91,9 @@ if __name__ == '__main__':
     csvfile = open('match-list.csv', 'w', newline='')
     listwriter = csv.writer(csvfile, quoting=csv.QUOTE_MINIMAL)
 
-  # Grab all filenames from column 'A' and begin glob loop
+  # Grab all filenames from column 'column' and begin glob loop
   counter = 0
-  filenames = worksheet[0].col_values(1)  
+  filenames = worksheet[0].col_values(column)  
   for x in range(len(filenames)):
     counter += 1
     pattern = path + "/**/" + filenames[x]
@@ -105,11 +113,13 @@ if __name__ == '__main__':
         print("  Found! List of 'fuzzy' matching files: '{}'".format(found))
         if show:
           basename = os.path.basename(found[0])
-          listwriter.writerow([basename])
+          line = "{}  Fuzzy match found with pathname of {}.".format(basename, found[0])
+          listwriter.writerow([line])
       else:
         print("  ****************************************************************************************** \n    NOPE, could not even find a FUZZY match!" )
         if show:
-          listwriter.writerow(["NO match found!"])
+          line = "NO match of any kind found for pattern {}!".format(pattern)
+          listwriter.writerow([line])
 
 
 
