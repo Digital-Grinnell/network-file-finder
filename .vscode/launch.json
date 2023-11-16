@@ -12,7 +12,7 @@
       "program": "${file}",
       "console": "integratedTerminal",
       "justMyCode": true,
-      "args": ["-w", "https://docs.google.com/spreadsheets/d/1hngZ7KOuuD3Ahxptr0jd0Yfv67BmCmqOToQ11SXPWck/edit#gid=554996606", "-t", "/Volumes/HADC_Repository", "-s", "-c", "B"]
+      "args": ["-w", "https://docs.google.com/spreadsheets/d/17rq1KjayX1j0kopLIQ6LjbMY34qXZJjINticfKsErUw/edit#gid=791993009", "-t", "/Volumes/DGingest", "-s", "-c", "G"]
     }
   ]
 }

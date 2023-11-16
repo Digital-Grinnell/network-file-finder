@@ -1,0 +1,416 @@
+
+Number of arguments: 4
+Argument List: ['-w', 'https://docs.google.com/spreadsheets/d/1lgJi5w8XM8sI_hYeuwEmrztY1MlMxGA8dgq0-g9wwTE/edit#gid=791993009', '-t', '/Volumes/DGIngest'] 
+
+
+1. Finding a filename match for '/Volumes/DGIngest/**/OBJ'...
+  NONE FOUND! Starting 'fuzzy' search for: '*'...
+  Found! List of 'fuzzy' matching files: '['script.sh', 'match-list.csv', 'python-requirements.txt', 'README.md', 'network-file-finder.py', 'output.txt']'
+
+2. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b1f3_interculturalgroup.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b1f3_interculturalgroup.jpg']'
+
+3. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b1f3_interculturalbonfire.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b1f3_interculturalbonfire.jpg']'
+
+4. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b2f1_chinesescholarscis.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b2f1_chinesescholarscis.tif']'
+
+5. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b2f1_chinesereception.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b2f1_chinesereception.tif']'
+
+6. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b4f3_chinesecalligraphy.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b4f3_chinesecalligraphy.jpg']'
+
+7. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b4f3_chinesecalligraphy2.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b4f3_chinesecalligraphy2.jpg']'
+
+8. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s11b1item27_commencement2004_4700.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s11b1item27_commencement2004_4700.jpg']'
+
+9. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s11b1item27_commencement2004_4704.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s11b1item27_commencement2004_4704.jpg']'
+
+10. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s11b1item27_commencement2004_4722.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s11b1item27_commencement2004_4722.jpg']'
+
+11. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s11b1item28_stonewall_9103.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s11b1item28_stonewall_9103.jpg']'
+
+12. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s11b1item28_stonewall_9104.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s11b1item28_stonewall_9104.jpg']'
+
+13. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s11b1item28_stonewall_9106.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s11b1item28_stonewall_9106.jpg']'
+
+14. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b6f4_chalutzim.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b6f4_chalutzim.tif']'
+
+15. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b7f3_challahworkshop.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b7f3_challahworkshop.jpg']'
+
+16. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s11b2item33_HoliCelebration_0011.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s11b2item33_HoliCelebration_0011.jpg']'
+
+17. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s11b2item33_HoliCelebration_0045.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s11b2item33_HoliCelebration_0045.jpg']'
+
+18. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s11b2item33_HoliCelebration_0046.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s11b2item33_HoliCelebration_0046.jpg']'
+
+19. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b9f1_dsc.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b9f1_dsc.jpg']'
+
+20. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b9f1_bbqueer.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b9f1_bbqueer.jpg']'
+
+21. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b9f1_dsc2.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b9f1_dsc2.jpg']'
+
+22. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b9f2_selah.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b9f2_selah.jpg']'
+
+23. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b10f1_russiansongcircle.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b10f1_russiansongcircle.jpg']'
+
+24. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b12f4_ygbchoir.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b12f4_ygbchoir.jpg']'
+
+25. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b13f5_madresdeplazademayo.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b13f5_madresdeplazademayo.jpg']'
+
+26. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b13f4_challahworkshop.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b13f4_challahworkshop.jpg']'
+
+27. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b15f1_diadelosmuertos.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b15f1_diadelosmuertos.tif']'
+
+28. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s6b56f1_StudentLifeMinority_0001.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s6b56f1_StudentLifeMinority_0001.tif']'
+
+29. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s6b56f1_StudentLifeMinority_0003.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s6b56f1_StudentLifeMinority_0003.tif']'
+
+30. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s6b56f1_StudentLifeMinority_0004.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s6b56f1_StudentLifeMinority_0004.tif']'
+
+31. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s6b56f1_StudentLifeMinority_0005.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s6b56f1_StudentLifeMinority_0005.tif']'
+
+32. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s6b56f1_StudentLifeMinority_0006.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s6b56f1_StudentLifeMinority_0006.tif']'
+
+33. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s6b56f1_StudentLifeMinority_0007.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s6b56f1_StudentLifeMinority_0007.tif']'
+
+34. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s6b56f1_StudentLifeMinority_0008.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s6b56f1_StudentLifeMinority_0008.tif']'
+
+35. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s6b56f1_StudentLifeMinority_0009.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s6b56f1_StudentLifeMinority_0009.tif']'
+
+36. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b15f7_internationalstudentsfarm.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b15f7_internationalstudentsfarm.jpg']'
+
+37. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b16f2_chineseopera.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b16f2_chineseopera.tif']'
+
+38. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b18f2_holifestival.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b18f2_holifestival.tif']'
+
+39. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b18f3_isoculturalevening.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b18f3_isoculturalevening.tif']'
+
+40. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b18f3_isoculturalevening2.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b18f3_isoculturalevening2.tif']'
+
+41. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b18f3_isoculturalevening3.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b18f3_isoculturalevening3.tif']'
+
+42. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s7b2f22_drummingclass.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s7b2f22_drummingclass.tif']'
+
+43. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s7b5f15_asiafoodbazaar.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s7b5f15_asiafoodbazaar.tif']'
+
+44. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s7b5f14_studentlife.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s7b5f14_studentlife.tif']'
+
+45. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s7b5f3_shabbatdinner.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s7b5f3_shabbatdinner.tif']'
+
+46. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s7b5f3_shabbatdinner2.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s7b5f3_shabbatdinner2.tif']'
+
+47. Finding a filename match for '/Volumes/DGIngest/**/lib_rgs_s1,28b1_aaa1.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgs_s1,28b1_aaa1.tif']'
+
+48. Finding a filename match for '/Volumes/DGIngest/**/lib_rgs_s1,28b1_aaa2.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgs_s1,28b1_aaa2.tif']'
+
+49. Finding a filename match for '/Volumes/DGIngest/**/lib_rgs_s1,28b1_aaa3.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgs_s1,28b1_aaa3.tif']'
+
+50. Finding a filename match for '/Volumes/DGIngest/**/lib_rgs_s1,28b1_aaa4.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgs_s1,28b1_aaa4.tif']'
+
+51. Finding a filename match for '/Volumes/DGIngest/**/lib_rgs_s1,28b1_aaa5.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgs_s1,28b1_aaa5.tif']'
+
+Number of arguments: 5
+Argument List: ['-w', 'https://docs.google.com/spreadsheets/d/1lgJi5w8XM8sI_hYeuwEmrztY1MlMxGA8dgq0-g9wwTE/edit#gid=791993009', '-t', '/Volumes/DGIngest', '-s'] 
+
+
+1. Finding a filename match for '/Volumes/DGIngest/**/OBJ'...
+  NONE FOUND! Starting 'fuzzy' search for: '*'...
+  Found! List of 'fuzzy' matching files: '['script.sh', 'match-list.csv', 'python-requirements.txt', 'README.md', 'network-file-finder.py', 'output.txt']'
+
+2. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b1f3_interculturalgroup.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b1f3_interculturalgroup.jpg']'
+
+3. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b1f3_interculturalbonfire.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b1f3_interculturalbonfire.jpg']'
+
+4. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b2f1_chinesescholarscis.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b2f1_chinesescholarscis.tif']'
+
+5. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b2f1_chinesereception.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b2f1_chinesereception.tif']'
+
+6. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b4f3_chinesecalligraphy.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b4f3_chinesecalligraphy.jpg']'
+
+7. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b4f3_chinesecalligraphy2.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b4f3_chinesecalligraphy2.jpg']'
+
+8. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s11b1item27_commencement2004_4700.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s11b1item27_commencement2004_4700.jpg']'
+
+9. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s11b1item27_commencement2004_4704.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s11b1item27_commencement2004_4704.jpg']'
+
+10. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s11b1item27_commencement2004_4722.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s11b1item27_commencement2004_4722.jpg']'
+
+11. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s11b1item28_stonewall_9103.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s11b1item28_stonewall_9103.jpg']'
+
+12. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s11b1item28_stonewall_9104.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s11b1item28_stonewall_9104.jpg']'
+
+13. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s11b1item28_stonewall_9106.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s11b1item28_stonewall_9106.jpg']'
+
+14. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b6f4_chalutzim.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b6f4_chalutzim.tif']'
+
+15. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b7f3_challahworkshop.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b7f3_challahworkshop.jpg']'
+
+16. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s11b2item33_HoliCelebration_0011.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s11b2item33_HoliCelebration_0011.jpg']'
+
+17. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s11b2item33_HoliCelebration_0045.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s11b2item33_HoliCelebration_0045.jpg']'
+
+18. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s11b2item33_HoliCelebration_0046.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s11b2item33_HoliCelebration_0046.jpg']'
+
+19. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b9f1_dsc.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b9f1_dsc.jpg']'
+
+20. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b9f1_bbqueer.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b9f1_bbqueer.jpg']'
+
+21. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b9f1_dsc2.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b9f1_dsc2.jpg']'
+
+22. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b9f2_selah.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b9f2_selah.jpg']'
+
+23. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b10f1_russiansongcircle.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b10f1_russiansongcircle.jpg']'
+
+24. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b12f4_ygbchoir.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b12f4_ygbchoir.jpg']'
+
+25. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b13f5_madresdeplazademayo.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b13f5_madresdeplazademayo.jpg']'
+
+26. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b13f4_challahworkshop.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b13f4_challahworkshop.jpg']'
+
+27. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b15f1_diadelosmuertos.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b15f1_diadelosmuertos.tif']'
+
+28. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s6b56f1_StudentLifeMinority_0001.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s6b56f1_StudentLifeMinority_0001.tif']'
+
+29. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s6b56f1_StudentLifeMinority_0003.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s6b56f1_StudentLifeMinority_0003.tif']'
+
+30. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s6b56f1_StudentLifeMinority_0004.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s6b56f1_StudentLifeMinority_0004.tif']'
+
+31. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s6b56f1_StudentLifeMinority_0005.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s6b56f1_StudentLifeMinority_0005.tif']'
+
+32. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s6b56f1_StudentLifeMinority_0006.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s6b56f1_StudentLifeMinority_0006.tif']'
+
+33. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s6b56f1_StudentLifeMinority_0007.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s6b56f1_StudentLifeMinority_0007.tif']'
+
+34. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s6b56f1_StudentLifeMinority_0008.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s6b56f1_StudentLifeMinority_0008.tif']'
+
+35. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s6b56f1_StudentLifeMinority_0009.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s6b56f1_StudentLifeMinority_0009.tif']'
+
+36. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b15f7_internationalstudentsfarm.jpg'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b15f7_internationalstudentsfarm.jpg']'
+
+37. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b16f2_chineseopera.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b16f2_chineseopera.tif']'
+
+38. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b18f2_holifestival.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b18f2_holifestival.tif']'
+
+39. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b18f3_isoculturalevening.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b18f3_isoculturalevening.tif']'
+
+40. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b18f3_isoculturalevening2.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b18f3_isoculturalevening2.tif']'
+
+41. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s12b18f3_isoculturalevening3.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s12b18f3_isoculturalevening3.tif']'
+
+42. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s7b2f22_drummingclass.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s7b2f22_drummingclass.tif']'
+
+43. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s7b5f15_asiafoodbazaar.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s7b5f15_asiafoodbazaar.tif']'
+
+44. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s7b5f14_studentlife.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s7b5f14_studentlife.tif']'
+
+45. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s7b5f3_shabbatdinner.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s7b5f3_shabbatdinner.tif']'
+
+46. Finding a filename match for '/Volumes/DGIngest/**/lib_rgr_s7b5f3_shabbatdinner2.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgr_s7b5f3_shabbatdinner2.tif']'
+
+47. Finding a filename match for '/Volumes/DGIngest/**/lib_rgs_s1,28b1_aaa1.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgs_s1,28b1_aaa1.tif']'
+
+48. Finding a filename match for '/Volumes/DGIngest/**/lib_rgs_s1,28b1_aaa2.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgs_s1,28b1_aaa2.tif']'
+
+49. Finding a filename match for '/Volumes/DGIngest/**/lib_rgs_s1,28b1_aaa3.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgs_s1,28b1_aaa3.tif']'
+
+50. Finding a filename match for '/Volumes/DGIngest/**/lib_rgs_s1,28b1_aaa4.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgs_s1,28b1_aaa4.tif']'
+
+51. Finding a filename match for '/Volumes/DGIngest/**/lib_rgs_s1,28b1_aaa5.tif'...
+  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgs_s1,28b1_aaa5.tif']'

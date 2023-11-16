@@ -1,6 +1,6 @@
 # Network File Finder
 
-A Python script desinged to recursively "find" a list of files in network storage.  The list of files will be a range of cells from the specified column of a specified Google Sheet.  If an exact match can't be found, a "fuzzy" search is initiated to look for any matching filenames, but with a wildcard in place of the original extension.  The effect can be seen in the sample output from a "fuzzy" result shown below.  
+A Python script designed to recursively "find" a list of files in network storage.  The list of files will be a range of cells from the specified column of a specified Google Sheet.  If an exact match can't be found, a "fuzzy" search is initiated to look for any matching filenames, but with a wildcard in place of the original extension.  The effect can be seen in the sample output from a "fuzzy" result shown below.  
 
 ```
 Finding a filename match for '/Volumes/DGIngest/Reunion/**/grinnell-26849.jpg'...

@@ -9,6 +9,7 @@ import gspread as gs
 import glob
 import csv
 import os.path
+import fnmatch
 
 # import os
 # import pathlib
@@ -94,33 +95,56 @@ if __name__ == '__main__':
   # Grab all filenames from column 'column' and begin glob loop
   counter = 0
   filenames = worksheet[0].col_values(column)  
+
   for x in range(len(filenames)):
     counter += 1
-    pattern = path + "/**/" + filenames[x]
+    dir = path + "/**/"
+    pattern = filenames[x]
     print("\n{}. Finding a filename match for '{}'...".format(counter, pattern))
-    found = glob.glob(pattern, recursive=True)
+    csv_line = []  
+
+    # Because glob.glob( ) isn't case-sensitive in Windows or SMB shares...
+    # we have to do this exhaustive case-sensitive search. 
+    found = False
+
+    csv_line.append(pattern)
+
+    for root, dirs, files in os.walk(path):
+      dirs[:] = [d for d in dirs if not d[0] == '.']
+      if not found: 
+        for filename in files:
+          if fnmatch.fnmatchcase(filename, pattern):
+            found = root + "/" + filename
+            break
+
+    # Check if we found an EXACT case-sensitive match
     if found:
       print("  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-      print("  Found! List of matching files: '{}'".format(found))
-      if show:
-        line = "Found exact match for: {}".format(found[0])
-        listwriter.writerow([line])
+      print("  Found! EXACT matching file: '{}'".format(found))
+      basename = os.path.basename(found)
+      csv_line.append('EXACT match')
+      csv_line.append(found)
+      csv_line.append("{}".format(basename))
+
+    # No EXACT match, check for a fuzzy match
     else:
+      pattern = dir + filenames[x]
       fuzzy = make_fuzzy_filename(pattern)
       print("  NONE FOUND! Starting 'fuzzy' search for: '{}'...".format(fuzzy) )
       found = glob.glob(fuzzy, recursive=True)
       if found:
         print("  Found! List of 'fuzzy' matching files: '{}'".format(found))
-        if show:
-          basename = os.path.basename(found[0])
-          line = "{}  Fuzzy match found with pathname of {}.".format(basename, found[0])
-          listwriter.writerow([line])
+        basename = os.path.basename(found[0])
+        csv_line.append('FUZZY match')
+        csv_line.append("{}".format(found[0]))
+        csv_line.append("{}".format(basename))
       else:
         print("  ****************************************************************************************** \n    NOPE, could not even find a FUZZY match!" )
-        if show:
-          line = "NO match of any kind found for pattern {}!".format(pattern)
-          listwriter.writerow([line])
+        csv_line.append('NO match')
+        csv_line.append('NONE found!')
 
+    if show:
+      listwriter.writerow(csv_line)
 
 
 

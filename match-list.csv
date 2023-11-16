@@ -1,25 +1,32 @@
-script.sh  Fuzzy match found with pathname of script.sh.
-NO match of any kind found for pattern /Volumes/HADC_Repository/**/WCA_1979.008.001.jpg!
-Found exact match for: /Volumes/HADC_Repository/WordPress Images/Converted 1024 by 768 Metals/WCA_1979.013.001.jpg
-NO match of any kind found for pattern /Volumes/HADC_Repository/**/WCA_1998.0001.001.jpg!
-Found exact match for: /Volumes/HADC_Repository/WordPress Images/Converted_1024_768 Paintings/WCA_1981.0002.001.jpg
-Found exact match for: /Volumes/HADC_Repository/WordPress Images/Converted 1024 by 768 Metals/WCA_1981.0009.001.jpg
-NO match of any kind found for pattern /Volumes/HADC_Repository/**/WCA_1895.0009.001.jpg!
-NO match of any kind found for pattern /Volumes/HADC_Repository/**/WCA_1995.003.0001.jpg!
-NO match of any kind found for pattern /Volumes/HADC_Repository/**/WCA_1996.042.001.jpg!
-Found exact match for: /Volumes/HADC_Repository/WordPress Images/Converted 1024 768 Flagss/WCA_1998.0066.001.jpg
-WCA_1998.0082.001.jpg  Fuzzy match found with pathname of /Volumes/HADC_Repository/WordPress Images/Converted 1024 768 Flagss/WCA_1998.0082.001.jpg.
-WCA_1998.0083.001.jpg  Fuzzy match found with pathname of /Volumes/HADC_Repository/WordPress Images/Converted 1024 768 Flagss/WCA_1998.0083.001.jpg.
-NO match of any kind found for pattern /Volumes/HADC_Repository/**/WCA_0180.001.jpg!
-NO match of any kind found for pattern /Volumes/HADC_Repository/**/WCA_1999.0032.001.jpg!
-NO match of any kind found for pattern /Volumes/HADC_Repository/**/WCA_2003.0002.001.jpg!
-NO match of any kind found for pattern /Volumes/HADC_Repository/**/WCA_2003.0003.001.jpg!
-NO match of any kind found for pattern /Volumes/HADC_Repository/**/WCA_2003.0004.001.jpg!
-NO match of any kind found for pattern /Volumes/HADC_Repository/**/WCA_2003.0005.001.jpg!
-Found exact match for: /Volumes/HADC_Repository/WordPress Images/Converted 1024 768 Flagss/WCA_2006.0093.001.jpg
-Found exact match for: /Volumes/HADC_Repository/
-Found exact match for: /Volumes/HADC_Repository/WordPress Images/Converted 1024 by 768 Metals/WCA_2007.0227.001.jpg
-NO match of any kind found for pattern /Volumes/HADC_Repository/**/WCA_2007.0261.001.jpg!
-NO match of any kind found for pattern /Volumes/HADC_Repository/**/WCA_2007.0263.001.jpg!
-Found exact match for: /Volumes/HADC_Repository/WordPress Images/Converted 1024 by 768 Metals/WCA_2007.0325.001.jpg
-NO match of any kind found for pattern /Volumes/HADC_Repository/**/WCA_2009.0154.001.jpg!
+OBJ,FUZZY match,script.sh,script.sh
+,FUZZY match,script.sh,script.sh
+lib_03_22p2_1960_LittleSandB1960.pdf,EXACT match,/Volumes/DGingest/LittleSandB/lib_03_22p2_1960_LittleSandB1960.pdf,lib_03_22p2_1960_LittleSandB1960.pdf
+lib_03_22p2_1961_LittleSandB1961.pdf,EXACT match,/Volumes/DGingest/LittleSandB/lib_03_22p2_1961_LittleSandB1961.pdf,lib_03_22p2_1961_LittleSandB1961.pdf
+lib_03_22p2_1962_LittleSandB1962.pdf,EXACT match,/Volumes/DGingest/LittleSandB/lib_03_22p2_1962_LittleSandB1962.pdf,lib_03_22p2_1962_LittleSandB1962.pdf
+lib_03_22p2_1963_LittleSandB1963.pdf,EXACT match,/Volumes/DGingest/LittleSandB/lib_03_22p2_1963_LittleSandB1963.pdf,lib_03_22p2_1963_LittleSandB1963.pdf
+1964_LittleScarletandBlack.pdf,EXACT match,/Volumes/DGingest/LittleSandB/1964_LittleScarletandBlack.pdf,1964_LittleScarletandBlack.pdf
+lib_03_22p2_1965_LittleSandB1965.pdf,NO match,NONE found!
+lib_03_22p2_1966_LittleSandB1966.pdf,NO match,NONE found!
+lib_03_22p2_1967_LittleSandB1967.pdf,EXACT match,/Volumes/DGingest/LittleSandB/lib_03_22p2_1967_LittleSandB1967.pdf,lib_03_22p2_1967_LittleSandB1967.pdf
+lib_03_22p2_1968_LittleSandB1968.pdf,EXACT match,/Volumes/DGingest/LittleSandB/lib_03_22p2_1968_LittleSandB1968.pdf,lib_03_22p2_1968_LittleSandB1968.pdf
+lib_03_22p2_1969_LittleSandB1969.pdf,EXACT match,/Volumes/DGingest/LittleSandB/lib_03_22p2_1969_LittleSandB1969.pdf,lib_03_22p2_1969_LittleSandB1969.pdf
+lib_03_22p2_1970_LittleSandB1970.pdf,EXACT match,/Volumes/DGingest/LittleSandB/lib_03_22p2_1970_LittleSandB1970.pdf,lib_03_22p2_1970_LittleSandB1970.pdf
+lib_03_22p2_1971_LittleSandB1971.pdf,EXACT match,/Volumes/DGingest/LittleSandB/lib_03_22p2_1971_LittleSandB1971.pdf,lib_03_22p2_1971_LittleSandB1971.pdf
+lib_03_22p2_1972_LittleSandB1972.pdf,EXACT match,/Volumes/DGingest/LittleSandB/lib_03_22p2_1972_LittleSandB1972.pdf,lib_03_22p2_1972_LittleSandB1972.pdf
+1973_LittleScarletandBlackBook.pdf,EXACT match,/Volumes/DGingest/LittleSandB/1973_LittleScarletandBlackBook.pdf,1973_LittleScarletandBlackBook.pdf
+lib_03_22p2_1974_LittleSandB1974.pdf,EXACT match,/Volumes/DGingest/LittleSandB/lib_03_22p2_1974_LittleSandB1974.pdf,lib_03_22p2_1974_LittleSandB1974.pdf
+lib_03_22p2_1975_LittleSandB1975.pdf,EXACT match,/Volumes/DGingest/LittleSandB/lib_03_22p2_1975_LittleSandB1975.pdf,lib_03_22p2_1975_LittleSandB1975.pdf
+lib_03_22p2_1986_NewStudents1986.pdf,EXACT match,/Volumes/DGingest/LittleSandB/lib_03_22p2_1986_NewStudents1986.pdf,lib_03_22p2_1986_NewStudents1986.pdf
+lib_03_22p2_1987_NewStudents1987.pdf,NO match,NONE found!
+lib_03_22p3_1988_NewStudents1988.pdf,NO match,NONE found!
+lib_03_22p3_1989_NewStudents1989.pdf,EXACT match,/Volumes/DGingest/LittleSandB/lib_03_22p3_1989_NewStudents1989.pdf,lib_03_22p3_1989_NewStudents1989.pdf
+lib_03_22p3_1990_NewStudents1990.pdf,EXACT match,/Volumes/DGingest/LittleSandB/lib_03_22p3_1990_NewStudents1990.pdf,lib_03_22p3_1990_NewStudents1990.pdf
+lib_03_22p3_1991_NewStudents1991.pdf,EXACT match,/Volumes/DGingest/LittleSandB/lib_03_22p3_1991_NewStudents1991.pdf,lib_03_22p3_1991_NewStudents1991.pdf
+lib_03_22p3_1992_NewStudents1992.pdf,EXACT match,/Volumes/DGingest/LittleSandB/lib_03_22p3_1992_NewStudents1992.pdf,lib_03_22p3_1992_NewStudents1992.pdf
+lib_03_22p3_1993_NewStudents1993.pdf,EXACT match,/Volumes/DGingest/LittleSandB/lib_03_22p3_1993_NewStudents1993.pdf,lib_03_22p3_1993_NewStudents1993.pdf
+lib_03_22p3_1994_NewStudents1994.pdf,EXACT match,/Volumes/DGingest/LittleSandB/lib_03_22p3_1994_NewStudents1994.pdf,lib_03_22p3_1994_NewStudents1994.pdf
+lib_03_22p3_1995_NewStudents1995.pdf,EXACT match,/Volumes/DGingest/LittleSandB/lib_03_22p3_1995_NewStudents1995.pdf,lib_03_22p3_1995_NewStudents1995.pdf
+lib_03_22p3_1996_NewStudents1996.pdf,EXACT match,/Volumes/DGingest/LittleSandB/lib_03_22p3_1996_NewStudents1996.pdf,lib_03_22p3_1996_NewStudents1996.pdf
+lib_03_22p3_1997_NewStudents1997.pdf,EXACT match,/Volumes/DGingest/LittleSandB/lib_03_22p3_1997_NewStudents1997.pdf,lib_03_22p3_1997_NewStudents1997.pdf
+lib_03_22p3_1998_NewStudents1998.pdf,EXACT match,/Volumes/DGingest/LittleSandB/lib_03_22p3_1998_NewStudents1998.pdf,lib_03_22p3_1998_NewStudents1998.pdf
+lib_03_22p3_1994_NewStudents1994.pdf,EXACT match,/Volumes/DGingest/LittleSandB/lib_03_22p3_1994_NewStudents1994.pdf,lib_03_22p3_1994_NewStudents1994.pdf
