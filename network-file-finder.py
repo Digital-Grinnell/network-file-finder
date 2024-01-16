@@ -1,23 +1,22 @@
 # network-file-finder.py
 ##
-## This script is designed to read all of filenames from column 'A' of a specified Google Sheets 'worksheet', and "glob" for matching files in a specified network storage directory tree.
+## This script is designed to read all of filenames from a specified --column of a specified
+## --worksheet Google Sheet and fuzzy match with files found in a specified --tree-path 
+## network storage directory tree.
 
 import sys
 import getopt
 import re
 import gspread as gs
-import glob
 import csv
 import os.path
-import fnmatch
+from fuzzywuzzy import fuzz, process
 
-# import os
-# import pathlib
-# from datetime import datetime
-# from queue import Empty
-# from typing import Dict
+# Local packages
+import my_colorama
 
 # --- Function definitions
+
 
 def extract_sheet_id_from_url(url):
   res = re.compile(r'#gid=([0-9]+)').search(url)
@@ -25,13 +24,53 @@ def extract_sheet_id_from_url(url):
     return res.group(1)
   raise Exception('No valid sheet ID found in the specified Google Sheet.')
 
-def make_fuzzy_filename(pattern):
-  f = pattern
-  dot = f.rfind('.')
-  if dot:
-    f = pattern[:dot+1] + '*'
-  return f
+
+def check_significant(regex, filename):
+  import re
+
+  if '(' in regex:             # regex already has a (group), do not add one
+    pattern = regex
+  else: 
+    pattern = f"({regex})"     # regex is raw, add a (group) pair of parenthesis
+
+  try:
+    match = re.search(pattern, filename) 
+    if match:
+      return match.group( )
+    else:
+      return False
+  except Exception as e:
+    assert False, f"Exception: {e}"  
+
+
+def build_lists_and_dict(significant, target, files_list, paths_list):
+  significant_file_list = []
+  significant_path_list = [] 
+  significant_match = False
+  is_significant = "*"
+
+  # If a --regex (significant) was specified see if our target has a matching component...
+  if significant:
+    significant_match = check_significant(significant, target)
+    if significant_match:   # ...it does, pare the significant_*_list down to only significant matches
+      for i, f in enumerate(files_list): 
+        is_significant = check_significant(significant_match, f)
+        if is_significant:
+          significant_file_list.append(f)
+          significant_path_list.append(paths_list[i])
   
+  # If there's no significant_match... make the output lists match the input lists
+  if not significant_match:
+    significant_file_list = files_list
+    significant_path_list = paths_list 
+
+  # Now, per https://github.com/seatgeek/fuzzywuzzy/issues/165 build an indexed dict of significant files
+  file_dict = {idx: el for idx, el in enumerate(significant_file_list)}
+
+  # Return a tuple of significant match and the three significant lists
+  return (significant_match, significant_file_list, significant_path_list, file_dict)    
+
+
 # --- Main
 
 if __name__ == '__main__':
@@ -39,364 +78,192 @@ if __name__ == '__main__':
   # --- Arg handling
   # arg handling per https://www.tutorialspoint.com/python/python_command_line_arguments.htm
   
-  print('\nNumber of arguments:', len(sys.argv[1:]))
-  print('Argument List:', str(sys.argv[1:]), "\n")
+  my_colorama.blue(f"\nNumber of arguments: {len(sys.argv[1:])}")
+  my_colorama.blue(f"Argument List:' {str(sys.argv[1:])}\n")
 
   args = sys.argv[1:]
-  show = False
+  output_to_csv = False
 
   try:
-    opts, args = getopt.getopt(args, 'shw:c:t:', ["help", "worksheet=", "column=", "tree-path="])
+    opts, args = getopt.getopt(args, 'hokw:c:t:r:s:', ["help", "output-csv", "kept-file-list", "worksheet=", "column=", "tree-path=", "regex=", "skip-rows="])
   except getopt.GetoptError:
-    print("python3 network-file-finder.py --help --worksheet <worksheet URL> --column <worksheet filename column> --tree-path <network tree path> --show-matches\n")
+    my_colorama.yellow("python3 network-file-finder.py --help --output-csv --kept-file-list --worksheet <worksheet URL> --column <worksheet filename column> --tree-path <network tree path> --regex <significant regex> \n")
     sys.exit(2)
 
-  # default column for filenames is 'G' = 7 
+  # Default column for filenames is 'G' = 7 and number of header rows to skip = 1
   column = 7
+  levehstein_ratio = 90
+  skip_rows = 1
+  significant = False
+  kept_file_list = False
 
+  # Process the command line arguments
   for opt, arg in opts:
     if opt in ("-h", "--help"):
-      print("python3 network-file-finder.py --help --worksheet <worksheet URL> --column <filename column> --tree-path <network tree path> --show-matches\n")
+      my_colorama.yellow("python3 network-file-finder.py --help --output-csv --keep-file-list --worksheet <worksheet URL> --column <filename column> --tree-path <network tree path> --regex <significant regex> --skip-rows <number of header rows to skip>\n")
       sys.exit( )
     elif opt in ("-w", "--worksheet"):
       sheet = arg
+    # elif opt in ("-f", "--fuzzy-score"):
+    #   try:
+    #     val = int(arg)
+    #     if val >= 0 and val <= 100:
+    #       levehstein_ratio = val
+    #       break
+    #     else:
+    #       assert False, "Unhandled option: Fuzzy score must be an integer between 0 and 100."
+    #   except ValueError:
+    #     assert False, "Unhandled option: Fuzzy score must be an integer between 0 and 100."
     elif opt in ("-c", "--column"):
       if arg.isalpha() and arg.isupper():
         column = str(ord(arg)-64)
       else:
-        assert False, "Unhandled option: Column must be a single uppercase character from A through Z."
+        my_colorama.red("Unhandled option: Column must be a single uppercase character from A through Z.")
+        exit( )
     elif opt in ("-t", "--tree-path"):
       path = arg
-    elif opt in ("-s", "--show-matches"):
-      show = True
+    elif opt in ("-r", "--regex"):
+      significant = arg
+    elif opt in ("-s", "--skip-rows"):
+      try:
+        val = int(arg)
+        if val >= 0:
+          skip_rows = val
+        else:
+          my_colorama.red("Unhandled option: Number of rows to skip must be an integer >= 0.")
+          exit( )
+      except ValueError:
+        my_colorama.red("Unhandled option: Number of rows to skip must be an integer >= 0")
+        exit( )
+    elif opt in ("-o", "--output-csv"):
+      output_to_csv = True
+    elif opt in ("-k", "--kept-file-list"):
+      kept_file_list = True
     else:
-      assert False, "Unhandled option"
+      my_colorama.red("Unhandled command line option")
+      exit( )
 
-  # Open the Google service account and sheet
-  try:
-    sa = gs.service_account()
-  except Exception as e:
-    print(e)
+  # Create an empty list of filenames    
+  filenames = [ ]
+
+  # Check the kept_file_list switch.  If it is True then attempt to open the file-list.tmp file 
+  # saved from a previous run.  The intent is to cut-down on Google API calls.
+  if kept_file_list:
+    try:
+      with open('file-list.tmp', 'r') as file_list:
+        for filename in file_list:
+          filenames.append(filename.strip( ))
+    except Exception as e:
+      kept_file_list = False
+      pass  
+
+  # If we don't have a kept file list... Open the Google service account and sheet
+  if not kept_file_list:
+    try:
+      sa = gs.service_account()
+    except Exception as e:
+      my_colorama.red(e)
     
-  try:
-    sh = sa.open_by_url(sheet)
-  except Exception as e:
-    print(e)
+    try:
+      sh = sa.open_by_url(sheet)
+    except Exception as e:
+      my_colorama.red(e)
   
-  gid = int(extract_sheet_id_from_url(sheet))
-  worksheets = sh.worksheets()
-  worksheet = [w for w in sh.worksheets() if w.id == gid]
+    gid = int(extract_sheet_id_from_url(sheet))
+    worksheets = sh.worksheets()
+    worksheet = [w for w in sh.worksheets() if w.id == gid]
+    
+    # Grab all filenames from --column 
+    filenames = worksheet[0].col_values(column)  
+    try:
+      with open('file-list.tmp', 'w') as file_list:
+        for filename in filenames:
+          file_list.write(f"{filename}\n")
+    except Exception as e:
+      my_colorama.red("Unable to open temporary file 'file-list.tmp' for writing.")
+      exit( )
 
-  # If -show-matches is true, open a .csv file to receive the matching filenames
-  if show:
-    csvfile = open('match-list.csv', 'w', newline='')
+  # Grab all non-hidden filenames from the target directory tree so we only have to get the list once
+  # Exclusion of dot files per https://stackoverflow.com/questions/13454164/os-walk-without-hidden-folders
+  big_file_list = [ ]   # need a list of just filenames...
+  big_path_list = [ ]   # ...and parallel list of just the paths
+  significant_file_list = [ ]
+  significant_path_list = [ ] 
+  significant_dict = { }
+
+  for root, dirs, files in os.walk(path):
+    files = [f for f in files if not f[0] == '.']
+    dirs[:] = [d for d in dirs if not d[0] == '.']
+    for filename in files:
+      big_path_list.append(root)
+      big_file_list.append(filename)
+
+  # Check for ZERO network files in the big_file_list
+  if len(big_file_list) == 0:
+    my_colorama.red(f"The specified --tree-path of '{path}' returned NO files!  Check your path specification and network connection!\n")
+    exit( )
+
+  # Report our --regex option...
+  if significant:
+    my_colorama.green(f"\nProcessing only files matching signifcant --regex of '{significant}'!")
+  else:
+    my_colorama.green(f"\nNo --regex specified, matching will consider ALL paths and files.")
+
+  counter = 0
+  csvlines = [ ]
+
+  # Now the main matching loop...
+  for x in range(len(filenames)):
+    if x < skip_rows:  # skip this row if instructed to do so 
+      my_colorama.yellow(f"Skipping match for '{filenames[x]}' in worksheet row {x}")
+      continue         # move on and process the next row
+    
+    counter += 1
+    target = filenames[x]
+    my_colorama.green(f"\n{counter}. Finding best fuzzy filename matches for '{target}'...")
+    csv_line = [ ]  
+    significant_text = ''
+
+    (significant_text, significant_file_list, significant_path_list, significant_dict) = build_lists_and_dict(significant, target, big_file_list, big_path_list)    
+    my_colorama.blue(f"  Significant string is: '{significant_text}'.")
+
+    matches = process.extract(filenames[x], significant_dict, limit=3)
+    csv_line.append(f"{counter}")
+    csv_line.append(target)
+    csv_line.append(significant_text)
+
+    # Report the top three matches
+    if matches:
+      for found, (match, score, index) in enumerate(matches):
+        path = significant_path_list[index]
+        csv_line.append(path)
+        csv_line.append(f"{score}")
+        csv_line.append(match)
+        if found==0: 
+          # txt = ' | '.join(csv_line)
+          my_colorama.green("!!! Found BEST matching file: {}".format(csv_line))
+
+    else:
+      csv_line.append('NO match')
+      csv_line.append('0')
+      csv_line.append('NO match')
+      my_colorama.red("*** Found NO match for: {}".format(' | '.join(csv_line)))
+
+    if output_to_csv:
+      csvlines.append(csv_line)
+
+# If -output-csv is true, open a .csv file to receive the matching filenames and add a heading
+if output_to_csv:
+  with open('match-list.csv', 'w', newline='') as csvfile:
     listwriter = csv.writer(csvfile, quoting=csv.QUOTE_MINIMAL)
 
-  # Grab all filenames from column 'column' and begin glob loop
-  counter = 0
-  filenames = worksheet[0].col_values(column)  
+    if significant:
+      significant_header = f"'{significant}' Match"
+    else:  
+      significant_header = "Undefined"
 
-  for x in range(len(filenames)):
-    counter += 1
-    dir = path + "/**/"
-    pattern = filenames[x]
-    print("\n{}. Finding a filename match for '{}'...".format(counter, pattern))
-    csv_line = []  
+    header = ['No.', 'Target', significant_header, 'Path Found', 'Best Match Score', 'Best Match', '2nd Match Score', '2nd Match', '3rd Match Score', '3rd Match']
+    listwriter.writerow(header)
 
-    # Because glob.glob( ) isn't case-sensitive in Windows or SMB shares...
-    # we have to do this exhaustive case-sensitive search. 
-    found = False
-
-    csv_line.append(pattern)
-
-    for root, dirs, files in os.walk(path):
-      dirs[:] = [d for d in dirs if not d[0] == '.']
-      if not found: 
-        for filename in files:
-          if fnmatch.fnmatchcase(filename, pattern):
-            found = root + "/" + filename
-            break
-
-    # Check if we found an EXACT case-sensitive match
-    if found:
-      print("  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-      print("  Found! EXACT matching file: '{}'".format(found))
-      basename = os.path.basename(found)
-      csv_line.append('EXACT match')
-      csv_line.append(found)
-      csv_line.append("{}".format(basename))
-
-    # No EXACT match, check for a fuzzy match
-    else:
-      pattern = dir + filenames[x]
-      fuzzy = make_fuzzy_filename(pattern)
-      print("  NONE FOUND! Starting 'fuzzy' search for: '{}'...".format(fuzzy) )
-      found = glob.glob(fuzzy, recursive=True)
-      if found:
-        print("  Found! List of 'fuzzy' matching files: '{}'".format(found))
-        basename = os.path.basename(found[0])
-        csv_line.append('FUZZY match')
-        csv_line.append("{}".format(found[0]))
-        csv_line.append("{}".format(basename))
-      else:
-        print("  ****************************************************************************************** \n    NOPE, could not even find a FUZZY match!" )
-        csv_line.append('NO match')
-        csv_line.append('NONE found!')
-
-    if show:
-      listwriter.writerow(csv_line)
-
-
-
-
-
-#   # Read all worksheets from the Google Sheet, and find the sheet named "Update"
-#   sheets = sh.worksheets()
-#   for ws in sheets:
-#     title = ws.title
-#     # Found the "Update" sheet
-#     if (title == "Update"):
-
-#       # Generate a temporary .csv of the worksheet 
-#       # per https://community.esri.com/t5/python-questions/how-to-convert-a-google-spreadsheet-to-a-csv-file/td-p/452722
-#       with open('temp.csv', 'w', newline='') as csvfile:
-#         csvwriter = csv.writer(csvfile)
-#         csvwriter.writerows(ws.get_all_values())
-
-#       # Read the temporary .csv into a dict
-#       with open('temp.csv', 'r') as data:
-#         for record in csv.DictReader(data):
-
-#           # worksheet record now in dict form, process it for updates
-#           md_path = str(pathlib.Path.home()) + "/GitHub/rootstalk/content/" + record['Content Path'] + "/" + record['Filename'] + ".md"
-#           if os.path.exists(md_path):
-#             process_record(record, md_path)
-#           else:
-#             print(f"Warning: File '{md_path}' does not exist so it's record has been skipped.")
-
-#   exit()
-
-
-
-# def process_contributors(contributors, contributor_fields):
-#   c_filtered = dict()
-#   for f in contributor_fields:
-#     if f in contributors[0].keys():
-#       c_filtered[f] = contributors[0][f]
-#     else: 
-#       c_filtered[f] = ""
-#   return len(contributors), c_filtered 
-
-# def build_link(k, path):
-#   base_urls = { "develop":"https://thankful-flower-0a2308810.1.azurestaticapps.net/", "main":"https://icy-tree-020380010.azurestaticapps.net/", "production":"https://rootstalk.grinnell.edu/" }
-#   filename = path.name
-#   parent = path.parent.name
-#   grandma = path.parent.parent.name
-#   if (filename == "_index.md"):
-#     filename = ""
-#   else:
-#     filename = filename[:-3]    # remove .md  
-#   if "past" in grandma:
-#     url = f"{base_urls[k]}{grandma}/{parent}/{filename}"
-#   else:
-#     url = f"{base_urls[k]}{parent}/{filename}"
-#   return f"{url} "   # blank at the end is necessary for links to work properly
-
-# def parent_path(path):
-#   parent = path.parent.name
-#   grandma = path.parent.parent.name
-#   if "past" in grandma:
-#     return f"{grandma}/{parent}"
-#   else:
-#     return f"{parent}"
-
-# # Lifted from https://stackoverflow.com/a/54231563
-# #  csv_file - path to csv file to upload
-# #  sheet - a gspread.Spreadsheet object
-# #  cell - string giving starting cell, optionally including sheet/tab name
-# #    example: 'A1', 'MySheet!C3', etc.
-# def paste_csv(csv_file, sheet, cell):
-#   if '!' in cell:
-#     (tab_name, cell) = cell.split('!')
-#     wks = sheet.worksheet(tab_name)
-#   else:
-#     wks = sheet.sheet1
-#   (first_row, first_column) = gs.utils.a1_to_rowcol(cell)
-
-#   with open(csv_file, 'r') as f:
-#     csv_contents = f.read()
-#   body = {
-#     'requests': [{
-#       'pasteData': {
-#         "coordinate": {
-#           "sheetId": wks.id,
-#           "rowIndex": first_row-1,
-#           "columnIndex": first_column-1,
-#         },
-#         "data": csv_contents,
-#         "type": 'PASTE_NORMAL',
-#         "delimiter": ',',
-#       }
-#     }]
-#   }
-#   return sheet.batch_update(body)
-    
-# # From an example at https://pypi.org/project/gspread-formatting/
-# def format_google_sheet(sheet, tab_name):
-#   bold = gsf.cellFormat(
-#     backgroundColor=gsf.color(0.9, 0.9, 0.9),
-#     textFormat=gsf.textFormat(bold=True, foregroundColor=gsf.color(0, 0, 0)),
-#     )
-#   wks = sheet.worksheet(tab_name)
-#   batch = gsf.batch_updater(sheet)
-#   batch.set_frozen(wks, rows=1)
-#   batch.format_cell_ranges(wks, [('A1:Z1', bold)])
-#   return batch.execute()
-
-# # From a blog post at https://stackoverflow.com/questions/50938274/sort-a-spread-sheet-via-gspread
-# def sort_google_sheet(sheet, tab_name):
-#   wks = sheet.worksheet(tab_name)
-#   wks.sort((9, 'asc'))   # sort first by articleIndex
-#   wks.sort((1, 'asc'))   # now sort by Content Path
-#   return
-
-# # From an example at https://pypi.org/project/gspread-formatting/
-# def highlight_todo_cells(sheet, tab_name):
-#   wks = sheet.worksheet(tab_name)
-#   rule = gsf.ConditionalFormatRule(
-#     ranges=[gsf.GridRange.from_a1_range('H2:H2000', wks)],
-#     booleanRule=gsf.BooleanRule(
-#         condition=gsf.BooleanCondition('NOT_BLANK'),
-#         format=gsf.cellFormat(textFormat=gsf.textFormat(bold=True), backgroundColor=gsf.Color(1,1,0))
-#     )
-#   )
-
-#   rules = gsf.get_conditional_format_rules(wks)
-#   rules.append(rule)
-#   rules.save()
-
-
-# ######################################################################
-
-# # Main...
-# if __name__ == '__main__':
-#   csv_filename = "front-matter-status.csv"
-  
-#   # Open the .csv file for output
-#   with open(csv_filename, "w") as csvfile:
-#     writer = csv.DictWriter(csvfile, fieldnames=fields.values())
-#     writer.writeheader()
-
-#     # Specify the path to be processed...
-#     filepath = str(pathlib.Path.home()) + "/GitHub/rootstalk/content/**/volume*/*.md"
-  
-#     # Iterate over the working directory tree + subdirectories for all {issue}/{article}.md files
-#     # Using '*.md' pattern recursively
-#     for file in glob.glob(filepath, recursive=True):
-    
-#       path = pathlib.PurePath(file)
-#       article = frontmatter.load(file)
-#       obsolete = []
-#       filtered = dict()  # must be sure to initialize this to empty here!
-
-#       # Loop on each top-level element of the article's front matter 
-#       for key in article.metadata:
-
-#         # Found a key that we didn't expect... warning
-#         if key not in fields.keys():
-#           assert key not in obsolete, "Error: Front matter key '{key}' does not exist in ANY list!"
-
-#           print(f"Warning: Front matter key '{key}' is obselete. This article needs to be updated!")
-#           obsolete.append(key)
-        
-#         # We have an expected top-level key and value
-#         else:
-#           value = article.metadata[key]
-
-#           # If we have a list...
-#           if type(value) is list:
-#             if key == "contributors":
-#               c = value[0]
-#               for f in contributor_fields:
-#                 if f in c.keys():
-#                   filtered[fields[f]] = truncate(c[f])
-#                 else:
-#                   filtered[fields[f]] = ""
-#               value = len(value)
-
-#             # Just a list, nothing special  
-#             else:  
-#               value = ",".join(value)
-
-#           # If we have a dict...
-#           if type(value) is dict:
-#             if key == "header_image":
-#               for f in header_image_fields:
-#                 if f in value.keys():
-#                   filtered[fields[f]] = truncate(value[f])
-#                 else:
-#                   filtered[fields[f]] = ""
-#               value = True
-#             else:
-#               print(f"Warning: Unexpected front matter dict {key} found!")
-
-#           filtered[fields[key]] = truncate(value)
-    
-#       # Seed the .csv row with path and filename
-#       filtered[fields['md-file']] = path.name[:-3]
-#       filtered[fields['md-path']] = parent_path(path)
-
-#       # Build one live link for each code branch and seed the .csv row with them
-#       for key in branches:
-#         key_name = f"{key}-link"
-#         filtered[fields[key_name]] = build_link(key, path)
-
-#       # Note any obsolete front matter
-#       filtered[fields['obsolete']] = obsolete
-
-#       writer.writerow(filtered)
-
-#   # Ok, done writing the .csv, now copy it to a new tab/worksheet in our Google Sheet
-#   # Open the Google service account and sheet
-#   try:
-#     sa = gs.service_account()
-#   except Exception as e:
-#     print(e)
-
-#   try:  
-#     sh = sa.open("Rootstalk Articles Front Matter")
-#   except Exception as e:
-#     print(e)  
-
-#   # Make a datestamp to name the new worksheet
-#   sheet_name = datetime.now().strftime("%Y-%b-%d-%I:%M%p")
-  
-#   # Create the new/empty worksheet
-#   try:
-#     worksheet = sh.add_worksheet(title=sheet_name, rows=1, cols=1)
-#   except Exception as e:
-#     print(e)  
-
-#   # Call our function to write the new Google Sheet worksheet
-#   try:
-#     paste_csv(csv_filename, sh, sheet_name + "!A1")
-#   except Exception as e:
-#     print(e)
-
-#   # Call our format function to set the overall format of the new sheet
-#   try:
-#     format_google_sheet(sh, sheet_name)
-#   except Exception as e:
-#     print(e)
-
-#   # Call our function to sort the new sheet
-#   try:
-#     sort_google_sheet(sh, sheet_name)
-#   except Exception as e:
-#     print(e)
-
-#   # Call our function to set conditional formatting rules
-#   try:
-#     highlight_todo_cells(sh, sheet_name)
-#   except Exception as e:
-#     print(e)
+    for line in csvlines:
+      listwriter.writerow(line)

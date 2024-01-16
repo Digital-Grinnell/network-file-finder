@@ -1,7 +1,4 @@
 {
-  // Use IntelliSense to learn about possible attributes.
-  // Hover to view descriptions of existing attributes.
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
 
@@ -11,8 +8,7 @@
       "request": "launch",
       "program": "${file}",
       "console": "integratedTerminal",
-      "justMyCode": true,
-      "args": ["-w", "https://docs.google.com/spreadsheets/d/17rq1KjayX1j0kopLIQ6LjbMY34qXZJjINticfKsErUw/edit#gid=791993009", "-t", "/Volumes/DGingest", "-s", "-c", "G"]
+      "args": ["-w", "https://docs.google.com/spreadsheets/d/1g2AX4OxeQx70g2KlFbKKH2NoEGXKuyA7nCKdZ1xzj2s/edit#gid=791993009", "-t", "/Volumes/DGingest/JackRobertsonPhotos", "-o", "-k", "-c", "G", "-s", "1", "-r", "([0-9]{4})_"]
     }
   ]
 }
