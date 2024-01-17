@@ -225,7 +225,10 @@ if __name__ == '__main__':
     significant_text = ''
 
     (significant_text, significant_file_list, significant_path_list, significant_dict) = build_lists_and_dict(significant, target, big_file_list, big_path_list)    
-    my_colorama.blue(f"  Significant string is: '{significant_text}'.")
+    if significant_text:
+      my_colorama.blue(f"  Significant string is: '{significant_text}'.")
+    else: 
+      my_colorama.blue(f"  No significant --regex limit specified.")  
 
     matches = process.extract(filenames[x], significant_dict, limit=3)
     csv_line.append(f"{counter}")
@@ -236,16 +239,16 @@ if __name__ == '__main__':
     if matches:
       for found, (match, score, index) in enumerate(matches):
         path = significant_path_list[index]
-        csv_line.append(path)
         csv_line.append(f"{score}")
         csv_line.append(match)
+        csv_line.append(path)
         if found==0: 
           # txt = ' | '.join(csv_line)
           my_colorama.green("!!! Found BEST matching file: {}".format(csv_line))
 
     else:
-      csv_line.append('NO match')
       csv_line.append('0')
+      csv_line.append('NO match')
       csv_line.append('NO match')
       my_colorama.red("*** Found NO match for: {}".format(' | '.join(csv_line)))
 
@@ -262,7 +265,7 @@ if output_to_csv:
     else:  
       significant_header = "Undefined"
 
-    header = ['No.', 'Target', significant_header, 'Path Found', 'Best Match Score', 'Best Match', '2nd Match Score', '2nd Match', '3rd Match Score', '3rd Match']
+    header = ['No.', 'Target', 'Significant --regex', 'Best Match Score', 'Best Match', 'Best Match Path', '2nd Match Score', '2nd Match', '2nd Match Path', '3rd Match Score', '3rd Match', '3rd Match Path']
     listwriter.writerow(header)
 
     for line in csvlines:

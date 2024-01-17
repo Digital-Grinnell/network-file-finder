@@ -8,7 +8,7 @@
       "request": "launch",
       "program": "${file}",
       "console": "integratedTerminal",
-      "args": ["-w", "https://docs.google.com/spreadsheets/d/1g2AX4OxeQx70g2KlFbKKH2NoEGXKuyA7nCKdZ1xzj2s/edit#gid=791993009", "-t", "/Volumes/DGingest/JackRobertsonPhotos", "-o", "-k", "-c", "G", "-s", "1", "-r", "([0-9]{4})_"]
+      "args": ["-w", "https://docs.google.com/spreadsheets/d/1hngZ7KOuuD3Ahxptr0jd0Yfv67BmCmqOToQ11SXPWck/edit#gid=1443044806", "-t", "/Volumes/DGingest/HADC-250", "-o", "-c", "G", "-s", "3"]
     }
   ]
 }
