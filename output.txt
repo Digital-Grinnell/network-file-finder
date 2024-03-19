@@ -414,3 +414,30 @@ Argument List: ['-w', 'https://docs.google.com/spreadsheets/d/1lgJi5w8XM8sI_hYeu
 51. Finding a filename match for '/Volumes/DGIngest/**/lib_rgs_s1,28b1_aaa5.tif'...
   !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   Found! List of matching files: '['/Volumes/DGIngest/MulticulturalReunion2023/lib_rgs_s1,28b1_aaa5.tif']'
+
+Number of arguments: 4
+Argument List:' ['-w', 'https://docs.google.com/spreadsheets/d/17uNXLP5aTSCfYZ8FXBqTvDd-z0F19FJeAOK5TsCr-PI/edit#gid=750240076', '-t', '/Volumes/exports/']
+
+{'code': 403, 'message': 'The caller does not have permission', 'status': 'PERMISSION_DENIED'}
+
+Number of arguments: 4
+Argument List:' ['-w', 'https://docs.google.com/spreadsheets/d/17uNXLP5aTSCfYZ8FXBqTvDd-z0F19FJeAOK5TsCr-PI/edit#gid=750240076', '-t', '/Volumes/exports/']
+
+{'code': 403, 'message': 'The caller does not have permission', 'status': 'PERMISSION_DENIED'}
+
+Number of arguments: 4
+Argument List:' ['-w', 'https://docs.google.com/spreadsheets/d/17uNXLP5aTSCfYZ8FXBqTvDd-z0F19FJeAOK5TsCr-PI/edit#gid=750240076', '-t', '/Volumes/exports/']
+
+
+No --regex specified, matching will consider ALL paths and files.
+
+Number of arguments: 4
+Argument List:' ['-w', 'https://docs.google.com/spreadsheets/d/17uNXLP5aTSCfYZ8FXBqTvDd-z0F19FJeAOK5TsCr-PI/edit#gid=750240076', '-t', '/Volumes/exports/']
+
+
+No --regex specified, matching will consider ALL paths and files.
+
+Number of arguments: 6
+Argument List:' ['--column', 'objectid', '--worksheet', 'https://docs.google.com/spreadsheets/d/17uNXLP5aTSCfYZ8FXBqTvDd-z0F19FJeAOK5TsCr-PI/edit#gid=750240076', '--tree-path', '/Volumes/exports/']
+
+Unhandled option: Column must be a single uppercase character from A through Z.
