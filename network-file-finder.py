@@ -30,13 +30,170 @@ azure_base_url = "https://dgobjects.blob.core.windows.net/"
 # --- Function definitions
 
 
+# BIG_function( ) - The old processing guts of this script made into a function
+# --------------------------------------------------------------------------------------
+def BIG_function( ):
+
+  csvlines = [ ]
+
+  # Check the kept_file_list switch.  If it is True then attempt to open the file-list.tmp file 
+  # saved from a previous run.  The intent is to cut-down on Google API calls.
+  if kept_file_list:
+    try:
+      with open('file-list.tmp', 'r') as file_list:
+        for filename in file_list:
+          filenames.append(filename.strip( ))
+    except Exception as e:
+      kept_file_list = False
+      pass  
+
+  # If we don't have a kept file list... Open the Google service account and sheet
+  if not kept_file_list:
+    try:
+      sa = gs.service_account()
+    except Exception as e:
+      my_colorama.red(e)
+    
+    try:
+      sh = sa.open_by_url(sheet)
+    except Exception as e:
+      my_colorama.red(e)
+  
+    gid = int(extract_sheet_id_from_url(sheet))
+    worksheets = sh.worksheets()
+    worksheet = [w for w in sh.worksheets() if w.id == gid]
+    
+    # Grab all filenames from --column 
+    filenames = worksheet[0].col_values(column)  
+    try:
+      with open('file-list.tmp', 'w') as file_list:
+        for filename in filenames:
+          file_list.write(f"{filename}\n")
+    except Exception as e:
+      my_colorama.red("Unable to open temporary file 'file-list.tmp' for writing.")
+      exit( )
+
+    # Grab all non-hidden filenames from the target directory tree so we only have to get the list once
+    # Exclusion of dot files per https://stackoverflow.com/questions/13454164/os-walk-without-hidden-folders
+
+    for root, dirs, files in os.walk(path):
+      files = [f for f in files if not f[0] == '.']
+      dirs[:] = [d for d in dirs if not d[0] == '.']
+      for filename in files:
+        big_path_list.append(root)
+        big_file_list.append(filename)
+
+    # Check for ZERO network files in the big_file_list
+    if len(big_file_list) == 0:
+      my_colorama.red(f"The specified --tree-path of '{path}' returned NO files!  Check your path specification and network connection!\n")
+      exit( )
+
+    # Report our --regex option...
+    if significant:
+      my_colorama.green(f"\nProcessing only files matching signifcant --regex of '{significant}'!")
+    else:
+      my_colorama.green(f"\nNo --regex specified, matching will consider ALL paths and files.")
+
+    # Now the main matching loop...
+    for x in range(len(filenames)):
+      if x < skip_rows:  # skip this row if instructed to do so 
+        my_colorama.yellow(f"Skipping match for '{filenames[x]}' in worksheet row {x}")
+        continue         # move on and process the next row
+      
+      counter += 1
+      target = filenames[x]
+      
+      # If --grinnell is specified and the 'target' begins with 'grinnell_' AND does not contain '_OBJ'... make it so
+      if grinnell and ('grinnell_' in target) and ('_OBJ' not in target):
+        target += '_OBJ.'
+
+      my_colorama.green(f"\n{counter}. Finding best fuzzy filename matches for '{target}'...")
+      csv_line = [ ]  
+      significant_text = ''
+
+      (significant_text, significant_file_list, significant_path_list, significant_dict) = build_lists_and_dict(significant, target, big_file_list, big_path_list)    
+
+      report = "None"
+      if significant_text:
+        my_colorama.blue(f"  Significant string is: '{significant_text}'.")
+        report = significant_text
+      
+      # If target is blank, skip the search and set matches = False
+      matches = False
+      if len(target) > 0:
+        matches = process.extract(target, significant_dict, limit=3)
+      
+      # Append new line to CSV regardless if there was a match or not
+      csv_line.append(f"{counter}")
+      csv_line.append(target)
+      csv_line.append(report)
+
+      # Report the top three matches
+      if matches:
+        for found, (match, score, index) in enumerate(matches):
+          path = significant_path_list[index]
+          csv_line.append(f"{score}")
+          csv_line.append(match)
+          csv_line.append(path)
+          if found==0: 
+            # txt = ' | '.join(csv_line)
+            my_colorama.green("!!! Found BEST matching file: {}".format(csv_line))
+
+      else:
+        csv_line.append('0')
+        csv_line.append('NO match')
+        csv_line.append('NO match')
+        my_colorama.red("*** Found NO match for: {}".format(' | '.join(csv_line)))
+
+      # Save this fuzzy search result in 'csvlines' for return
+      csvlines.append(csv_line)
+
+    # If --output-csv is true, open a .csv file to receive the matching filenames and add a heading
+    if output_to_csv:
+      with open('match-list.csv', 'w', newline='') as csvfile:
+        listwriter = csv.writer(csvfile, quoting=csv.QUOTE_MINIMAL)
+
+        if significant:
+          significant_header = f"'{significant}' Match"
+        else:  
+          significant_header = "Undefined"
+
+        header = ['No.', 'Target', 'Significant --regex', 'Best Match Score', 'Best Match', 'Best Match Path', '2nd Match Score', '2nd Match', '2nd Match Path', '3rd Match Score', '3rd Match', '3rd Match Path']
+        listwriter.writerow(header)
+
+        for line in csvlines:
+          listwriter.writerow(line)
+
+    return csvlines
+
+
+# read_match_list_csv( )
+# --------------------------------------------------------------------------------------------------
+def read_match_list_csv( ):
+  csvlines = [ ]
+  try:
+    with open('match-list.csv', 'r') as csvfile:
+      reader_obj = csv.reader(csvfile)
+      for index, row in enumerate(reader_obj): 
+          if index > 0:
+            csvlines.append(row)
+  except Exception as e:
+    my_colorama.red("Exception: ")
+    my_colorama.red(f"{e}")
+    exit
+
+  return csvlines
+
+
+# upload_to_azure( ) - Just what the name says post-processing
+# ----------------------------------------------------------------------------------------------
 def upload_to_azure(blob_service_client, target, score, match, upload_file_path):
   try:
     
     # Check if the match score was 90 or above, if not, don't copy it!
     if score < 90:
       msg = f"Best match for '{target}' has an insufficient match score of {score}.  It will NOT be copied to Azure storage."
-      my_colorama.yellow(msg)
+      my_colorama.red(msg)
       return False
 
     # Determine which container ['objs','thumbs','smalls'] for this file
@@ -77,6 +234,8 @@ def upload_to_azure(blob_service_client, target, score, match, upload_file_path)
     my_colorama.yellow(f"{ex}")
 
 
+# extract_sheet_id_from_url(url)
+# ---------------------------------------------------------------------------------------
 def extract_sheet_id_from_url(url):
   res = re.compile(r'#gid=([0-9]+)').search(url)
   if res:
@@ -84,6 +243,8 @@ def extract_sheet_id_from_url(url):
   raise Exception('No valid sheet ID found in the specified Google Sheet.')
 
 
+# check_significant(regex, filename)
+# ---------------------------------------------------------------------------------------
 def check_significant(regex, filename):
   import re
 
@@ -102,6 +263,8 @@ def check_significant(regex, filename):
     assert False, f"Exception: {e}"  
 
 
+# build_lists_and_dict(significant, target, files_list, paths_list)
+# ---------------------------------------------------------------------------------------
 def build_lists_and_dict(significant, target, files_list, paths_list):
   significant_file_list = []
   significant_path_list = [] 
@@ -144,37 +307,38 @@ if __name__ == '__main__':
   output_to_csv = False
 
   try:
-    opts, args = getopt.getopt(args, 'haokxw:c:t:r:s:', ["help", "copy-to-azure", "output-csv", "kept-file-list", "extended", "worksheet=", "column=", "tree-path=", "regex=", "skip-rows="])
+    opts, args = getopt.getopt(args, 'haokmxgw:c:t:r:s:', ["help", "copy-to-azure", "output-csv", "kept-file-list", "extended", "grinnell", "use-match-list", "worksheet=", "column=", "tree-path=", "regex=", "skip-rows="])
   except getopt.GetoptError:
-    my_colorama.yellow("python3 network-file-finder.py --help --copy-to-azure --output-csv --kept-file-list --extended --worksheet <worksheet URL> --column <worksheet filename column> --tree-path <network tree path> --regex <significant regex> \n")
+    my_colorama.yellow("python3 network-file-finder.py --help --copy-to-azure --output-csv --kept-file-list --extended --grinnell --use-match-list --worksheet <worksheet URL> --column <worksheet filename column> --tree-path <network tree path> --regex <significant regex> \n")
     sys.exit(2)
 
   # Default column for filenames is 'G' = 7 and number of header rows to skip = 1
   column = 7
   levehstein_ratio = 90
   skip_rows = 1
+  
+  # Create remaining "global" variables so we don't have to pass them everywhere
   significant = False
   kept_file_list = False
   copy_to_azure = False
   extended = False
+  grinnell = False
+  use_match_list = False
+  counter = 0
+  csvlines = [ ]
+  big_file_list = [ ]   # need a list of just filenames...
+  big_path_list = [ ]   # ...and parallel list of just the paths
+  significant_file_list = [ ]
+  significant_path_list = [ ] 
+  significant_dict = { }
 
   # Process the command line arguments
   for opt, arg in opts:
     if opt in ("-h", "--help"):
-      my_colorama.yellow("python3 network-file-finder.py --help --output-csv --keep-file-list --worksheet <worksheet URL> --column <filename column> --tree-path <network tree path> --regex <significant regex> --skip-rows <number of header rows to skip> --copy-to-azure\n")
+      my_colorama.yellow("python3 network-file-finder.py --help --output-csv --keep-file-list --worksheet <worksheet URL> --column <filename column> --tree-path <network tree path> --regex <significant regex> --skip-rows <number of header rows to skip> --copy-to-azure --extended --grinnell --use-match-list\n")
       sys.exit( )
     elif opt in ("-w", "--worksheet"):
       sheet = arg
-    # elif opt in ("-f", "--fuzzy-score"):
-    #   try:
-    #     val = int(arg)
-    #     if val >= 0 and val <= 100:
-    #       levehstein_ratio = val
-    #       break
-    #     else:
-    #       assert False, "Unhandled option: Fuzzy score must be an integer between 0 and 100."
-    #   except ValueError:
-    #     assert False, "Unhandled option: Fuzzy score must be an integer between 0 and 100."
     elif opt in ("-c", "--column"):
       if arg.isalpha() and arg.isupper():
         column = str(ord(arg)-64)
@@ -202,145 +366,49 @@ if __name__ == '__main__':
       copy_to_azure = True
     elif opt in ("-k", "--kept-file-list"):
       kept_file_list = True
+    elif opt in ("-m", "--use-match-list"):
+      use_match_list = True
     elif opt in ("-x", "--extended"):
       extended = True
+    elif opt in ("-g", "--grinnell"):
+      grinnell = True
     else:
       my_colorama.red("Unhandled command line option")
       exit( )
 
+    # elif opt in ("-f", "--fuzzy-score"):
+    #   try:
+    #     val = int(arg)
+    #     if val >= 0 and val <= 100:
+    #       levehstein_ratio = val
+    #       break
+    #     else:
+    #       assert False, "Unhandled option: Fuzzy score must be an integer between 0 and 100."
+    #   except ValueError:
+    #     assert False, "Unhandled option: Fuzzy score must be an integer between 0 and 100."
+
   # Create an empty list of filenames    
   filenames = [ ]
 
-  # Check the kept_file_list switch.  If it is True then attempt to open the file-list.tmp file 
-  # saved from a previous run.  The intent is to cut-down on Google API calls.
-  if kept_file_list:
-    try:
-      with open('file-list.tmp', 'r') as file_list:
-        for filename in file_list:
-          filenames.append(filename.strip( ))
-    except Exception as e:
-      kept_file_list = False
-      pass  
+  # If --use-match-list then open previous fuzzy search results from `match-list.csv` and skip to post-processing
+  if use_match_list:
+    csvlines = read_match_list_csv( )
 
-  # If we don't have a kept file list... Open the Google service account and sheet
-  if not kept_file_list:
-    try:
-      sa = gs.service_account()
-    except Exception as e:
-      my_colorama.red(e)
-    
-    try:
-      sh = sa.open_by_url(sheet)
-    except Exception as e:
-      my_colorama.red(e)
-  
-    gid = int(extract_sheet_id_from_url(sheet))
-    worksheets = sh.worksheets()
-    worksheet = [w for w in sh.worksheets() if w.id == gid]
-    
-    # Grab all filenames from --column 
-    filenames = worksheet[0].col_values(column)  
-    try:
-      with open('file-list.tmp', 'w') as file_list:
-        for filename in filenames:
-          file_list.write(f"{filename}\n")
-    except Exception as e:
-      my_colorama.red("Unable to open temporary file 'file-list.tmp' for writing.")
-      exit( )
-
-  # Grab all non-hidden filenames from the target directory tree so we only have to get the list once
-  # Exclusion of dot files per https://stackoverflow.com/questions/13454164/os-walk-without-hidden-folders
-  big_file_list = [ ]   # need a list of just filenames...
-  big_path_list = [ ]   # ...and parallel list of just the paths
-  significant_file_list = [ ]
-  significant_path_list = [ ] 
-  significant_dict = { }
-
-  for root, dirs, files in os.walk(path):
-    files = [f for f in files if not f[0] == '.']
-    dirs[:] = [d for d in dirs if not d[0] == '.']
-    for filename in files:
-      big_path_list.append(root)
-      big_file_list.append(filename)
-
-  # Check for ZERO network files in the big_file_list
-  if len(big_file_list) == 0:
-    my_colorama.red(f"The specified --tree-path of '{path}' returned NO files!  Check your path specification and network connection!\n")
-    exit( )
-
-  # Report our --regex option...
-  if significant:
-    my_colorama.green(f"\nProcessing only files matching signifcant --regex of '{significant}'!")
+  # Not using the match-list.csv results... call the BIG function!
   else:
-    my_colorama.green(f"\nNo --regex specified, matching will consider ALL paths and files.")
+    csvlines = BIG_function( )    
 
-  counter = 0
-  csvlines = [ ]
-
-  # Now the main matching loop...
-  for x in range(len(filenames)):
-    if x < skip_rows:  # skip this row if instructed to do so 
-      my_colorama.yellow(f"Skipping match for '{filenames[x]}' in worksheet row {x}")
-      continue         # move on and process the next row
-    
-    counter += 1
-    target = filenames[x]
-    my_colorama.green(f"\n{counter}. Finding best fuzzy filename matches for '{target}'...")
-    csv_line = [ ]  
-    significant_text = ''
-
-    (significant_text, significant_file_list, significant_path_list, significant_dict) = build_lists_and_dict(significant, target, big_file_list, big_path_list)    
-    if significant_text:
-      my_colorama.blue(f"  Significant string is: '{significant_text}'.")
-    else: 
-      my_colorama.blue(f"  No significant --regex limit specified.")  
-
-    matches = process.extract(filenames[x], significant_dict, limit=3)
-    csv_line.append(f"{counter}")
-    csv_line.append(target)
-    csv_line.append(significant_text)
-
-    # Report the top three matches
-    if matches:
-      for found, (match, score, index) in enumerate(matches):
-        path = significant_path_list[index]
-        csv_line.append(f"{score}")
-        csv_line.append(match)
-        csv_line.append(path)
-        if found==0: 
-          # txt = ' | '.join(csv_line)
-          my_colorama.green("!!! Found BEST matching file: {}".format(csv_line))
-
-    else:
-      csv_line.append('0')
-      csv_line.append('NO match')
-      csv_line.append('NO match')
-      my_colorama.red("*** Found NO match for: {}".format(' | '.join(csv_line)))
-
-    if output_to_csv or copy_to_azure:
-      csvlines.append(csv_line)
-
-# If --output-csv is true, open a .csv file to receive the matching filenames and add a heading
-if output_to_csv:
-  with open('match-list.csv', 'w', newline='') as csvfile:
-    listwriter = csv.writer(csvfile, quoting=csv.QUOTE_MINIMAL)
-
-    if significant:
-      significant_header = f"'{significant}' Match"
-    else:  
-      significant_header = "Undefined"
-
-    header = ['No.', 'Target', 'Significant --regex', 'Best Match Score', 'Best Match', 'Best Match Path', '2nd Match Score', '2nd Match', '2nd Match Path', '3rd Match Score', '3rd Match', '3rd Match Path']
-    listwriter.writerow(header)
-
-    for line in csvlines:
-      listwriter.writerow(line)
+## Post-processing...
+## ------------------------------------------------------------------------------------------
 
 # If --copy-to-azure is true... for each '_OBJ.' (and if --extended '_TN.jpg' or '_JPG.jpg') match 
 # execute a copy to Azure Blob Storage operation.  For this to work our AZURE_STORAGE_CONNECTION_STRING
 # environment variable must be in place and accurate.  
 #
 if copy_to_azure:
+  msg = f"\n\tBeginning copy_to_azure process for {len(csvlines)} objects.\n\t"
+  my_colorama.blue(msg)
+
   try:
 
     # Retrieve the connection string for use with the application. The storage
@@ -382,12 +450,12 @@ if copy_to_azure:
       # If --extended is on... try again for a _TN.jpg file and _JPG.jpg file
       if extended:
         
-        tn = target.replace("_OBJ", "_TN.jpg")
+        tn = target.replace("_OBJ.", "_TN.jpg")
         upload_file_path = os.path.join(path, tn)
         if os.path.isfile(upload_file_path):
           tn_url = upload_to_azure(blob_service_client, tn, 100, tn, upload_file_path)
 
-        jpg = target.replace("_OBJ", "_JPG.jpg")
+        jpg = target.replace("_OBJ.", "_JPG.jpg")
         upload_file_path = os.path.join(path, jpg)
         if os.path.isfile(upload_file_path):
           jpg_url = upload_to_azure(blob_service_client, jpg, 100, jpg, upload_file_path)
@@ -404,6 +472,6 @@ if copy_to_azure:
 
 
   except Exception as ex:
-    my_colorama.yellow('Exception:')
-    my_colorama.yellow(f"{ex}")
+    my_colorama.red('Exception:')
+    my_colorama.red(f"{ex}")
 

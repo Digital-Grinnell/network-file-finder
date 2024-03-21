@@ -4,11 +4,11 @@
 
     {
       "name": "Python: Current File",
-      "type": "python",
+      "type": "debugpy",
       "request": "launch",
       "program": "${file}",
       "console": "integratedTerminal",
-      "args": ["-w", "https://docs.google.com/spreadsheets/d/17uNXLP5aTSCfYZ8FXBqTvDd-z0F19FJeAOK5TsCr-PI/edit#gid=1733997771", "-t", "/Volumes/exports", "-a", "-c", "B", "-s", "1", "-x"]
+      "args": ["-w", "https://docs.google.com/spreadsheets/d/17uNXLP5aTSCfYZ8FXBqTvDd-z0F19FJeAOK5TsCr-PI/edit#gid=663101020", "-t", "/Volumes/exports", "-c", "A", "-s", "1", "-x", "-g", "-a", "-k", "-o", "-m"]
     }
   ]
 }
