@@ -201,13 +201,13 @@ def upload_to_azure(blob_service_client, target, score, match, upload_file_path)
 
     if "_OBJ." in match:
       container_name = 'objs'
-      url = azure_base_url + "/objs/" + match 
+      url = azure_base_url + "objs/" + match 
     elif "_TN.jpg" in match:
       container_name = 'thumbs'   
-      url = azure_base_url + "/thumbs/" + match 
+      url = azure_base_url + "thumbs/" + match 
     elif "_JPG.jpg" in match:
       container_name = 'smalls'   
-      url = azure_base_url + "/smalls/" + match 
+      url = azure_base_url + "smalls/" + match 
 
     # Create a blob client using the local file name as the name for the blob
     if container_name:
