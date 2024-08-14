@@ -8,7 +8,7 @@
       "request": "launch",
       "program": "${file}",
       "console": "integratedTerminal",
-      "args": ["-w", "https://docs.google.com/spreadsheets/d/17uNXLP5aTSCfYZ8FXBqTvDd-z0F19FJeAOK5TsCr-PI/edit#gid=663101020", "-t", "/Volumes/exports", "-c", "A", "-s", "1", "-x", "-g", "-a", "-o"]
+      "args": ["-w", "https://docs.google.com/spreadsheets/d/1JzW8TGU8qJlBAlyoMyDS1mkLTGoaLrsCzVtwQo-4JlU#gid=275533058", "-t", "/Volumes/exports/student-scholarship", "-c", "AW", "-s", "1", "-o"]
     }
   ]
 }

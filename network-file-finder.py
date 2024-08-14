@@ -264,6 +264,15 @@ def extract_sheet_id_from_url(url):
     return res.group(1)
   raise Exception('No valid sheet ID found in the specified Google Sheet.')
 
+# excel_column_number(name)     
+# from https://stackoverflow.com/questions/7261936/convert-an-excel-or-spreadsheet-column-letter-to-its-number-in-pythonic-fashion
+# ------------------------------------------------------------------------------
+def excel_column_number(name):
+  """Excel-style column name to number, e.g., A = 1, Z = 26, AA = 27, AAA = 703."""
+  n = 0
+  for c in name:
+    n = n * 26 + 1 + ord(c) - ord('A')
+  return n
 
 # check_significant(regex, filename)
 # ---------------------------------------------------------------------------------------
@@ -343,9 +352,9 @@ if __name__ == '__main__':
       sheet = arg
     elif opt in ("-c", "--column"):
       if arg.isalpha() and arg.isupper():
-        column = str(ord(arg)-64)
+        column = excel_column_number(arg)
       else:
-        my_colorama.red("Unhandled option: Column must be a single uppercase character from A through Z.")
+        my_colorama.red("Unhandled option: Column must be an uppercase character or string using only letters A through Z.")
         exit( )
     elif opt in ("-t", "--tree-path"):
       path = arg
