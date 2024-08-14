@@ -8,7 +8,7 @@
       "request": "launch",
       "program": "${file}",
       "console": "integratedTerminal",
-      "args": ["-w", "https://docs.google.com/spreadsheets/d/17uNXLP5aTSCfYZ8FXBqTvDd-z0F19FJeAOK5TsCr-PI/edit#gid=663101020", "-t", "/Volumes/exports", "-c", "A", "-s", "1", "-x", "-g", "-a", "-k", "-o", "-m"]
+      "args": ["-w", "https://docs.google.com/spreadsheets/d/17uNXLP5aTSCfYZ8FXBqTvDd-z0F19FJeAOK5TsCr-PI/edit#gid=663101020", "-t", "/Volumes/exports", "-c", "A", "-s", "1", "-x", "-g", "-a", "-o"]
     }
   ]
 }

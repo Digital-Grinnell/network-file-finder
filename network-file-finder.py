@@ -26,29 +26,50 @@ import my_colorama
 
 # Globals
 azure_base_url = "https://dgobjects.blob.core.windows.net/"
+column = 7     # Default column for filenames is 'G' = 7 
+skip_rows = 1  # Default number of header rows to skip = 1
+levehstein_ratio = 90
+significant = False
+kept_file_list = False
+copy_to_azure = False
+extended = False
+grinnell = False
+use_match_list = False
+counter = 0
+csvlines = [ ]
+big_file_list = [ ]   # need a list of just filenames...
+big_path_list = [ ]   # ...and parallel list of just the paths
+significant_file_list = [ ]
+significant_path_list = [ ] 
+significant_dict = { }
+
 
 # --- Function definitions
 
 
 # BIG_function( ) - The old processing guts of this script made into a function
 # --------------------------------------------------------------------------------------
-def BIG_function( ):
+def BIG_function(kept_file_list, path, counter):
 
   csvlines = [ ]
 
-  # Check the kept_file_list switch.  If it is True then attempt to open the file-list.tmp file 
+  # Check the --kept-file-list switch.  If it is True then attempt to open the file-list.tmp file 
   # saved from a previous run.  The intent is to cut-down on Google API calls.
   if kept_file_list:
     try:
       with open('file-list.tmp', 'r') as file_list:
         for filename in file_list:
-          filenames.append(filename.strip( ))
+          if filename:
+            filenames.append(filename.strip( ))
+          else: 
+            filenames.append("")
+
     except Exception as e:
       kept_file_list = False
       pass  
 
   # If we don't have a kept file list... Open the Google service account and sheet
-  if not kept_file_list:
+  else:
     try:
       sa = gs.service_account()
     except Exception as e:
@@ -232,6 +253,7 @@ def upload_to_azure(blob_service_client, target, score, match, upload_file_path)
   except Exception as ex:
     my_colorama.yellow('Exception:')
     my_colorama.yellow(f"{ex}")
+    pass
 
 
 # extract_sheet_id_from_url(url)
@@ -312,30 +334,10 @@ if __name__ == '__main__':
     my_colorama.yellow("python3 network-file-finder.py --help --copy-to-azure --output-csv --kept-file-list --extended --grinnell --use-match-list --worksheet <worksheet URL> --column <worksheet filename column> --tree-path <network tree path> --regex <significant regex> \n")
     sys.exit(2)
 
-  # Default column for filenames is 'G' = 7 and number of header rows to skip = 1
-  column = 7
-  levehstein_ratio = 90
-  skip_rows = 1
-  
-  # Create remaining "global" variables so we don't have to pass them everywhere
-  significant = False
-  kept_file_list = False
-  copy_to_azure = False
-  extended = False
-  grinnell = False
-  use_match_list = False
-  counter = 0
-  csvlines = [ ]
-  big_file_list = [ ]   # need a list of just filenames...
-  big_path_list = [ ]   # ...and parallel list of just the paths
-  significant_file_list = [ ]
-  significant_path_list = [ ] 
-  significant_dict = { }
-
   # Process the command line arguments
   for opt, arg in opts:
     if opt in ("-h", "--help"):
-      my_colorama.yellow("python3 network-file-finder.py --help --output-csv --keep-file-list --worksheet <worksheet URL> --column <filename column> --tree-path <network tree path> --regex <significant regex> --skip-rows <number of header rows to skip> --copy-to-azure --extended --grinnell --use-match-list\n")
+      my_colorama.yellow("python3 network-file-finder.py --help --output-csv --kept-file-list --worksheet <worksheet URL> --column <filename column> --tree-path <network tree path> --regex <significant regex> --skip-rows <number of header rows to skip> --copy-to-azure --extended --grinnell --use-match-list\n")
       sys.exit( )
     elif opt in ("-w", "--worksheet"):
       sheet = arg
@@ -396,7 +398,7 @@ if __name__ == '__main__':
 
   # Not using the match-list.csv results... call the BIG function!
   else:
-    csvlines = BIG_function( )    
+    csvlines = BIG_function(kept_file_list, path, counter)    
 
 ## Post-processing...
 ## ------------------------------------------------------------------------------------------
